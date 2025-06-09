@@ -42,8 +42,3 @@ This project is currently **in development**.
 - Node.js & npm
 - MongoDB (local or cloud)
 - Expo CLI (if using Expo)
-
-### Clone the repository
-```bash
-git clone https://github.com/your-username/technician-booking-app.git
-cd technician-booking-app
