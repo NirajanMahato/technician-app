@@ -1,50 +1,49 @@
-# Welcome to your Expo app 👋
+# Welcome to your Expo app  # Technician Booking App👋
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile application built with **React Native** for seamless booking of trusted technicians, including **plumbers**, **electricians**, and other home service professionals.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚧 Project Status
 
-   ```bash
-   npm install
-   ```
+This project is currently **in development**.
 
-2. Start the app
+---
 
-   ```bash
-   npx expo start
-   ```
+## 📱 Features (Planned)
 
-In the output, you'll find options to open the app in a
+- 🔍 Browse and search for available technicians
+- 🧰 Book services like plumbing, electrical repairs, and more
+- 📅 Schedule appointments based on technician availability
+- 📍 Location-based technician listings
+- 💬 In-app chat or contact options (future feature)
+- ⭐ User reviews and ratings
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+---
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## 🛠 Tech Stack
 
-## Get a fresh project
+### Frontend
+- **React Native** (using Expo or bare workflow)
+- **Redux** or Context API (for state management)
+- **React Navigation**
 
-When you're ready, run:
+### Backend
+- **Node.js** with **Express.js**
+- **MongoDB** for database
+- **Mongoose** for data modeling
+- RESTful API architecture
 
+---
+
+## 📦 Installation (For Development)
+
+### Prerequisites
+- Node.js & npm
+- MongoDB (local or cloud)
+- Expo CLI (if using Expo)
+
+### Clone the repository
 ```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+git clone https://github.com/your-username/technician-booking-app.git
+cd technician-booking-app
