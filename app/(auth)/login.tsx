@@ -1,16 +1,18 @@
+import BackButton from "@/components/BackButton";
 import InputField from "@/components/InputField";
 import PrimaryButton from "@/components/PrimaryButton";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import Typo from "@/components/Typo";
 import { colors, fonts } from "@/constants/theme";
+import { AntDesign, Feather } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import React, { useRef, useState } from "react";
 import {
-  Image,
+  Platform,
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View,
+  View
 } from "react-native";
 
 const Login = () => {
@@ -19,37 +21,33 @@ const Login = () => {
   const mobileInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const [mobileNumber, setMobileNumber] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+
+  const isValid = email.includes("@") && password.length >= 6;
 
   const handleLogin = () => {
-    setIsLoading(true);
-    console.log("Login Data:", { mobileNumber, password });
-    setIsLoading(false);
-  };
-
-  const handleRegister = () => {
-    router.push("/(auth)/register" as any);
+    if (!isValid) return;
+    console.log("Login Data:", { email, password });
   };
 
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <Image
-          source={require("@/assets/images/PlumberFinderLogo.png")}
-          style={styles.logo}
-        />
+        <BackButton/>
 
-        <Typo style={styles.title}>Login via phone number</Typo>
+        <Typo style={styles.heading}>Login</Typo>
+        <Typo style={styles.subHeading}>
+          Reliable technicians. Instant booking. Stress-free service.
+        </Typo>
 
         <InputField
           inputRef={mobileInputRef}
-          label="Mobile Number"
-          placeholder="Enter mobile number"
-          keyboardType="phone-pad"
-          value={mobileNumber}
-          onChangeText={setMobileNumber}
+          label="Email"
+          placeholder="Enter your email"
+          keyboardType="email-address"
+          value={email}
+          onChangeText={setEmail}
           returnKeyType="next"
           onSubmitEditing={() => passwordInputRef.current?.focus()}
         />
@@ -57,37 +55,54 @@ const Login = () => {
         <InputField
           inputRef={passwordInputRef}
           label="Password"
-          placeholder="Enter password"
+          placeholder="Enter your password"
           secureTextEntry
           value={password}
           onChangeText={setPassword}
           returnKeyType="done"
           onSubmitEditing={handleLogin}
+          rightIcon={<Feather name="eye" size={18} color={colors.grey500} />}
         />
 
         <TouchableOpacity
           style={styles.forgotPassword}
-          onPress={() => router.push("/(auth)/forgotPassword" as any)}
+          onPress={() => router.push("/(auth)/forgotPassword")}
         >
-          <Typo style={styles.forgotPasswordText}>Forgot your password?</Typo>
+          <Typo style={styles.forgotPasswordText}>Forgot Password?</Typo>
         </TouchableOpacity>
 
         <PrimaryButton
-          title="Login"
+          title="Continue"
           onPress={handleLogin}
-          loading={isLoading}
-          marginTop={40}
-          width="100%"
-          height={55}
-          backgroundColor={colors.primary}
-          borderRadius={8}
+          borderRadius={30}
+          disabled={!isValid}
+          marginTop={20}
+          backgroundColor={isValid ? colors.primary : colors.grey300}
+          height={54}
         />
-        <View style={styles.registerContainer}>
-          <Typo style={styles.registerText}>Don't have an account? </Typo>
+
+        <View style={styles.divider}>
+          <View style={styles.line} />
+          <Typo size={12} color={colors.grey500}>OR</Typo>
+          <View style={styles.line} />
         </View>
-        <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
-            <Typo style={styles.registerLink}>Register</Typo>
+
+        <TouchableOpacity style={styles.socialBtn}>
+          <AntDesign name="apple1" size={20} color={colors.black} />
+          <Typo style={styles.socialText}>Login with Apple</Typo>
         </TouchableOpacity>
+
+        <TouchableOpacity style={styles.socialBtn}>
+          <AntDesign name="google" size={20} color={colors.black} />
+          <Typo style={styles.socialText}>Login with Google</Typo>
+        </TouchableOpacity>
+
+        <View style={styles.registerContainer}>
+          <Typo size={14} color={colors.grey700}>Haven’t registered yet? </Typo>
+          <TouchableOpacity onPress={() => router.push("/(auth)/signupStep1")}>
+            <Typo size={14} color={colors.primary} fontWeight="600">Register</Typo>
+          </TouchableOpacity>
+        </View>
       </View>
     </ScreenWrapper>
   );
@@ -99,64 +114,61 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
-    paddingHorizontal: 20,
-    justifyContent: "flex-start",
+    paddingHorizontal: 24,
+    paddingTop: Platform.OS === "ios" ? 20 : 10,
   },
-  logo: {
-    alignSelf: "center",
-    marginTop: 90,
-    marginBottom: 40,
-    width: 220,
-    height: 50,
-    resizeMode: "contain",
+  backBtn: {
+    marginBottom: 30,
   },
-  title: {
-    fontSize: 22,
+  heading: {
+    fontSize: 28,
     fontFamily: fonts.bold,
     color: colors.black,
-    marginBottom: 30,
-    textAlign: "left",
+    marginTop:8,
+    marginBottom: 8,
+  },
+  subHeading: {
+    fontSize: 14,
+    color: colors.grey600,
+    marginBottom: 5,
   },
   forgotPassword: {
     marginTop: 10,
     alignSelf: "flex-end",
   },
   forgotPasswordText: {
-    color: colors.grey600,
     fontSize: 14,
-    fontFamily: fonts.regular,
+    color: colors.grey500,
+  },
+  divider: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 30,
+  },
+  line: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.grey300,
+  },
+  socialBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: colors.grey300,
+    borderRadius: 30,
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    marginBottom: 16,
+  },
+  socialText: {
+    marginLeft: 12,
+    fontSize: 15,
+    color: colors.black,
   },
   registerContainer: {
     flexDirection: "row",
     justifyContent: "center",
     marginTop: 20,
-  },
-  registerText: {
-    fontSize: 15,
-    color: colors.grey700,
-    fontFamily: fonts.regular,
-  },
-  registerLink: {
-    fontSize: 15,
-    color: colors.black,
-    fontFamily: fonts.medium,
-  },
-  registerButton: {
-    width: "100%",
-    height: 55,
-    marginTop: 20,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    backgroundColor: colors.background,
-    borderRadius: 8,
-    padding: 10,
-    borderWidth: 1,
-    borderColor: colors.grey300,
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 1,
   },
 });

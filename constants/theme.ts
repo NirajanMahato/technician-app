@@ -22,6 +22,7 @@ export const colors = {
   grey700: "#404040",
   grey800: "#262626",
   grey900: "#171717",
+  danger:"#ff0000"
 };
 
 export const fonts = {
@@ -77,6 +78,7 @@ export const spacingY = {
 
 export const radius = {
   _6: verticalScale(6),
+  _12: verticalScale(12),
   _10: verticalScale(10),
   _20: verticalScale(20),
 };

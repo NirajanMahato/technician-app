@@ -1,17 +1,17 @@
 import { colors } from "@/constants/theme";
 import { ScreenWrapperProps } from "@/types";
-import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Dimensions, Platform, StyleSheet, View } from "react-native";
+import { Dimensions, Platform, StatusBar, StyleSheet, View } from "react-native";
 
 const { height } = Dimensions.get("window");
 
 const ScreenWrapper = ({ style, children }: ScreenWrapperProps) => {
-  let paddingTop = Platform.OS === "ios" ? height * 0.045 : 50;
+  let paddingTop = Platform.OS === "ios" ? 0 : 10;
 
   return (
     <View style={[styles.wrapper, { paddingTop }, style]}>
-      <StatusBar style="dark" backgroundColor="#ffffff"></StatusBar>
+      <View style={{ height: Platform.OS === "android" ? StatusBar.currentHeight : 44, backgroundColor: colors.white }} />
+      <StatusBar barStyle="dark-content" translucent />
       {children}
     </View>
   );
