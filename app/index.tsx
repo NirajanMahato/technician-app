@@ -8,7 +8,7 @@ const index = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      router.push("/(auth)/login");
+      router.push("/(auth)/welcome");
     }, 2000);
   }, []);
 
@@ -17,7 +17,7 @@ const index = () => {
       <Image
         style={styles.logo}
         resizeMode="contain"
-        source={require("@/assets/images/GharSewaLogo.png")}
+        source={require("@/assets/images/PlumberFinderLogo.png")}
       />
     </View>
   );
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: colors.neutral100,
+    backgroundColor: colors.background,
   },
   logo: {
     height: "25%",

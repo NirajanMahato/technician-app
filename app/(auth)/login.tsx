@@ -37,7 +37,7 @@ const Login = () => {
     <ScreenWrapper>
       <View style={styles.container}>
         <Image
-          source={require("@/assets/images/GharSewaLogo.png")}
+          source={require("@/assets/images/PlumberFinderLogo.png")}
           style={styles.logo}
         />
 
@@ -79,14 +79,15 @@ const Login = () => {
           marginTop={40}
           width="100%"
           height={55}
+          backgroundColor={colors.primary}
+          borderRadius={8}
         />
-
         <View style={styles.registerContainer}>
           <Typo style={styles.registerText}>Don't have an account? </Typo>
-          <TouchableOpacity onPress={handleRegister}>
-            <Typo style={styles.registerLink}>Register</Typo>
-          </TouchableOpacity>
         </View>
+        <TouchableOpacity style={styles.registerButton} onPress={handleRegister}>
+            <Typo style={styles.registerLink}>Register</Typo>
+        </TouchableOpacity>
       </View>
     </ScreenWrapper>
   );
@@ -139,6 +140,23 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: colors.black,
     fontFamily: fonts.medium,
-    textDecorationLine: "underline",
+  },
+  registerButton: {
+    width: "100%",
+    height: 55,
+    marginTop: 20,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    backgroundColor: colors.background,
+    borderRadius: 8,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: colors.grey300,
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.1,
+    shadowRadius: 3,
+    elevation: 1,
   },
 });

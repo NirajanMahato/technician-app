@@ -1,8 +1,8 @@
 import { scale, verticalScale } from "@/utils/styling";
 
 export const colors = {
-  primary: "#3B82F6",       // blue-500
-  secondary: "#6366F1",     // indigo-500
+  primary: "#0060E6",
+  primaryDark: "#004CB6",
   neutral300: "#D1D5DB",    // gray-300
   background: "#FFFFFF",
   surface: "#F4F4F5",
