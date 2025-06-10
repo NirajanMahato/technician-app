@@ -29,6 +29,7 @@ const Login = () => {
   const handleLogin = () => {
     if (!isValid) return;
     console.log("Login Data:", { email, password });
+    router.push('/(home)');
   };
 
   return (
