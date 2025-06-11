@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.background,
   },
   logo: {
-    height: "35%",
+    height: "20%",
     aspectRatio: 1,
   },
 });

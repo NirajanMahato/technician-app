@@ -14,28 +14,28 @@ export default function CustomTabs({
       <Icons.House
         size={verticalScale(30)}
         weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.neutral400}
+        color={isFocused ? colors.primary : colors.grey400}
       />
     ),
     request: (isFocused: boolean) => (
       <Icons.Book
         size={verticalScale(30)}
         weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.neutral400}
+        color={isFocused ? colors.primary : colors.grey400}
       />
     ),
     message: (isFocused: boolean) => (
       <Icons.Chat
         size={verticalScale(30)}
         weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.neutral400}
+        color={isFocused ? colors.primary : colors.grey400}
       />
     ),
     account: (isFocused: boolean) => (
       <Icons.User
         size={verticalScale(30)}
         weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.neutral400}
+        color={isFocused ? colors.primary : colors.grey400}
       />
     ),
   };
@@ -96,10 +96,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     height: Platform.OS === "ios" ? verticalScale(73) : verticalScale(55),
-    backgroundColor: colors.neutral800,
+    backgroundColor: colors.grey800,
     justifyContent: "space-around",
     alignItems: "center",
-    borderTopColor: colors.neutral700,
+    borderTopColor: colors.grey700,
     borderTopWidth: 1,
   },
   tabbarItem: {

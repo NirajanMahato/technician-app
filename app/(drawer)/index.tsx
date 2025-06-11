@@ -1,5 +1,6 @@
 import { colors, fonts } from "@/constants/theme";
 import { Feather } from "@expo/vector-icons";
+import { DrawerActions, useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -24,6 +25,7 @@ const Home = () => {
   const [keyboardVisible, setKeyboardVisible] = useState(false);
   const cardAnim = useRef(new Animated.Value(200)).current;
   const keyboardOffset = useRef(new Animated.Value(0)).current;
+  const navigation = useNavigation();
 
   useEffect(() => {
     Animated.timing(cardAnim, {
@@ -109,7 +111,10 @@ const Home = () => {
       </TouchableWithoutFeedback>
 
       {/* Sidebar/Menu Button */}
-      <TouchableOpacity style={styles.sidebarBtn}>
+      <TouchableOpacity
+        style={styles.sidebarBtn}
+        onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+      >
         <Feather name="menu" size={28} color={colors.primary} />
       </TouchableOpacity>
 
@@ -194,7 +199,7 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: "rgba(255,255,255,0.97)",
-    paddingBottom: 60,
+    paddingBottom: 50,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     padding: 24,

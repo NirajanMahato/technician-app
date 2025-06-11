@@ -12,7 +12,7 @@ import {
   StyleSheet,
   TextInput,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 
 const Login = () => {
@@ -29,13 +29,13 @@ const Login = () => {
   const handleLogin = () => {
     if (!isValid) return;
     console.log("Login Data:", { email, password });
-    router.push('/(home)');
+    router.push("/(drawer)");
   };
 
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <BackButton/>
+        <BackButton />
 
         <Typo style={styles.heading}>Login</Typo>
         <Typo style={styles.subHeading}>
@@ -84,7 +84,9 @@ const Login = () => {
 
         <View style={styles.divider}>
           <View style={styles.line} />
-          <Typo size={12} color={colors.grey500}>OR</Typo>
+          <Typo size={12} color={colors.grey500}>
+            OR
+          </Typo>
           <View style={styles.line} />
         </View>
 
@@ -99,9 +101,13 @@ const Login = () => {
         </TouchableOpacity>
 
         <View style={styles.registerContainer}>
-          <Typo size={14} color={colors.grey700}>Haven’t registered yet? </Typo>
+          <Typo size={14} color={colors.grey700}>
+            Haven’t registered yet?{" "}
+          </Typo>
           <TouchableOpacity onPress={() => router.push("/(auth)/signupStep1")}>
-            <Typo size={14} color={colors.primary} fontWeight="600">Register</Typo>
+            <Typo size={14} color={colors.primary} fontWeight="600">
+              Register
+            </Typo>
           </TouchableOpacity>
         </View>
       </View>
@@ -125,7 +131,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontFamily: fonts.bold,
     color: colors.black,
-    marginTop:8,
+    marginTop: 8,
     marginBottom: 8,
   },
   subHeading: {
