@@ -1,6 +1,7 @@
 import { colors } from '@/constants/theme'
 import { AntDesign, Feather, FontAwesome5, Ionicons, MaterialIcons } from '@expo/vector-icons'
 import { DrawerActions, useNavigation } from '@react-navigation/native'
+import { useRouter } from 'expo-router'
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
@@ -39,10 +40,15 @@ const options = [
 ]
 
 const Profile = () => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
+  const router = useRouter();
 
   const handleOptionPress = (key: string) => {
-    alert(`Pressed: ${key}`)
+    if (key === 'logout') {
+      router.replace("/(auth)/login");
+    } else {
+      alert(`Pressed: ${key}`);
+    }
   }
 
   return (
@@ -127,15 +133,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 7,
-    backgroundColor: 'rgba(255,255,255,0.95)',
-    borderRadius: 16,
     padding: 8,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    zIndex: 10,
+    // backgroundColor: 'rgba(255,255,255,0.95)',
+    // borderRadius: 16,
+    // elevation: 4,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 0, height: 2 },
+    // shadowOpacity: 0.15,
+    // shadowRadius: 4,
+    // zIndex: 10,
   },
   headerTitle: {
     fontSize: 20,

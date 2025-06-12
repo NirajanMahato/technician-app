@@ -1,10 +1,7 @@
-import CustomDrawerContent from "@/components/CustomDrawerContent";
 import { useFonts } from "expo-font";
-import { Drawer } from "expo-router/drawer";
+import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import React, { useEffect } from "react";
-import { View } from "react-native";
-import Toast from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync(); // Prevent auto-hide while fonts load
 
@@ -18,27 +15,12 @@ const _layout = () => {
   });
 
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
+    if (fontsLoaded) SplashScreen.hideAsync();
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
 
-  return (
-    <View style={{ flex: 1 }}>
-      <Drawer
-        screenOptions={{
-          headerShown: false,
-          drawerStyle: {
-            width: "78%",
-          },
-        }}
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      />
-      <Toast />
-    </View>
-  );
+  return <Stack screenOptions={{ headerShown: false }} />;
 };
 
 export default _layout;

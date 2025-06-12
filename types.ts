@@ -151,3 +151,8 @@ export type ResponseType = {
   data?: any;
   msg?: string;
 };
+
+export type DrawerParamList = {
+  chat: { id: string };
+  // Add other drawer routes here as needed
+}; 
