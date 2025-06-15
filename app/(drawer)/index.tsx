@@ -1,6 +1,7 @@
 import { colors, fonts } from "@/constants/theme";
 import { Feather } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { useRouter } from "expo-router";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Animated,
@@ -28,6 +29,7 @@ const Home = () => {
   const cardAnim = useRef(new Animated.Value(0)).current;
   const overlayOpacity = useRef(new Animated.Value(0.1)).current;
   const navigation = useNavigation();
+  const router = useRouter();
 
   const areaSuggestions = [
     { title: "Thamel", subtitle: "Kathmandu" },
@@ -178,7 +180,10 @@ const Home = () => {
 
         {/* Search button only when collapsed */}
         {!inputFocused && (
-          <TouchableOpacity style={styles.searchBtn}>
+          <TouchableOpacity 
+            style={styles.searchBtn}
+            onPress={() => router.push({ pathname: "/(problems)", params: { location: address } })}
+          >
             <Text style={styles.searchBtnText}>Start a search</Text>
           </TouchableOpacity>
         )}
