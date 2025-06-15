@@ -31,7 +31,7 @@ const Welcome = () => {
           height={55}
           borderRadius={30}
         />
-        <TouchableOpacity style={styles.loginButton} onPress={() => router.push("/(auth)/login")}>
+        <TouchableOpacity style={styles.loginButton} onPress={() => router.replace("/(auth)/login")}>
           <Typo size={16} color={colors.primaryDark} style={styles.subtitle}>
             Login
           </Typo>

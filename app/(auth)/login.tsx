@@ -29,13 +29,12 @@ const Login = () => {
   const handleLogin = () => {
     if (!isValid) return;
     console.log("Login Data:", { email, password });
-    router.push("/(drawer)");
+    router.replace("/(drawer)");
   };
 
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <BackButton />
 
         <Typo style={styles.heading}>Login</Typo>
         <Typo style={styles.subHeading}>
