@@ -1,80 +1,46 @@
 // app/(booking)/searching.tsx
+import Typo from "@/components/Typo";
 import { fonts } from "@/constants/theme";
-import { LinearGradient } from 'expo-linear-gradient';
 import { useLocalSearchParams, useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import React, { useEffect, useRef } from "react";
-import { Animated, Dimensions, StatusBar, StyleSheet, Text, View } from "react-native";
-
-const { width, height } = Dimensions.get('window');
+import { Animated, StatusBar, StyleSheet, Text, View } from "react-native";
 
 const SearchingScreen = () => {
-  const { type, subProblem, searchType } = useLocalSearchParams<{
+  const { type, subProblem } = useLocalSearchParams<{
     type: string;
     subProblem: string;
-    searchType: string;
   }>();
   const router = useRouter();
-  const animationRef = useRef<LottieView>(null);
   
-  // Animation values for pulsing circles
-  const pulse1Anim = useRef(new Animated.Value(0)).current;
-  const pulse2Anim = useRef(new Animated.Value(0)).current;
-  const pulse3Anim = useRef(new Animated.Value(0)).current;
-
-  // Add these animation values at the top with other animations
-  const dot1Anim = useRef(new Animated.Value(0)).current;
-  const dot2Anim = useRef(new Animated.Value(0)).current;
-  const dot3Anim = useRef(new Animated.Value(0)).current;
+  const dot1 = useRef(new Animated.Value(0.3)).current;     // Simple dot animation
+  const dot2 = useRef(new Animated.Value(0.3)).current;
+  const dot3 = useRef(new Animated.Value(0.3)).current;
 
   useEffect(() => {
-    // Start pulse animations
-    const startPulseAnimation = (anim: Animated.Value, delay: number) => {
+    const animateDot = (anim: Animated.Value, delay: number) => {
       Animated.loop(
         Animated.sequence([
           Animated.timing(anim, {
             toValue: 1,
-            duration: 2000,
+            duration: 600,
             delay: delay,
             useNativeDriver: true,
           }),
           Animated.timing(anim, {
-            toValue: 0,
-            duration: 2000,
+            toValue: 0.3,
+            duration: 600,
             useNativeDriver: true,
           }),
         ])
       ).start();
     };
 
-    startPulseAnimation(pulse1Anim, 0);
-    startPulseAnimation(pulse2Anim, 500);
-    startPulseAnimation(pulse3Anim, 1000);
+    animateDot(dot1, 0);
+    animateDot(dot2, 200);
+    animateDot(dot3, 400);
 
-    // Add this to the existing useEffect
-    const startDotAnimation = (anim: Animated.Value, delay: number) => {
-      Animated.loop(
-        Animated.sequence([
-          Animated.timing(anim, {
-            toValue: 1,
-            duration: 1400,
-            delay: delay,
-            useNativeDriver: true,
-          }),
-          Animated.timing(anim, {
-            toValue: 0,
-            duration: 1400,
-            useNativeDriver: true,
-          }),
-        ])
-      ).start();
-    };
-
-    startDotAnimation(dot1Anim, 0);
-    startDotAnimation(dot2Anim, 200);
-    startDotAnimation(dot3Anim, 400);
-
-    // Simulate technician search delay
+    // Navigate after delay
     const timeout = setTimeout(() => {
       router.replace({
         pathname: "/(booking)/technician_found",
@@ -85,143 +51,44 @@ const SearchingScreen = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  // Interpolate values for pulse animations
-  const pulse1Scale = pulse1Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 1.3],
-  });
-
-  const pulse2Scale = pulse2Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 1.3],
-  });
-
-  const pulse3Scale = pulse3Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [1, 1.3],
-  });
-
-  const pulse1Opacity = pulse1Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.3, 0],
-  });
-
-  const pulse2Opacity = pulse2Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.3, 0],
-  });
-
-  const pulse3Opacity = pulse3Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.3, 0],
-  });
-
-  // Add these interpolations with other interpolations
-  const dot1Opacity = dot1Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.4, 1],
-  });
-
-  const dot2Opacity = dot2Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.4, 1],
-  });
-
-  const dot3Opacity = dot3Anim.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.4, 1],
-  });
-
   return (
     <View style={styles.container}>
-      <StatusBar barStyle="light-content" backgroundColor="#1e40af" />
+      <StatusBar barStyle="dark-content" backgroundColor="#ffffff" />
       
-      <LinearGradient
-        colors={['#1e40af', '#3b82f6', '#60a5fa']}
-        style={styles.gradientBackground}
-        start={{ x: 0, y: 0 }}
-        end={{ x: 1, y: 1 }}
-      >
-        {/* Header Section */}
-        <View style={styles.header}>
-          <Text style={styles.headerTitle}>Finding Your Expert</Text>
-          <Text style={styles.headerSubtitle}>
-            Searching for qualified {type?.toLowerCase()} specialists in your area
-          </Text>
-        </View>
+      <View style={styles.header}>
+        <Typo style={styles.title}>Finding Your Expert</Typo>
+      </View>
 
-        {/* Animation Section */}
-        <View style={styles.animationContainer}>
-          <View style={styles.animationWrapper}>
-            <LottieView
-              ref={animationRef}
-              source={require("@/assets/lottie/searching.json")}
-              autoPlay
-              loop
-              style={styles.animation}
-            />
-          </View>
-          
-          {/* Pulsing Circles for Loading Effect */}
-          <View style={styles.pulseContainer}>
-            <Animated.View 
-              style={[
-                styles.pulseCircle,
-                {
-                  transform: [{ scale: pulse1Scale }],
-                  opacity: pulse1Opacity,
-                }
-              ]} 
-            />
-            <Animated.View 
-              style={[
-                styles.pulseCircle,
-                {
-                  transform: [{ scale: pulse2Scale }],
-                  opacity: pulse2Opacity,
-                }
-              ]} 
-            />
-            <Animated.View 
-              style={[
-                styles.pulseCircle,
-                {
-                  transform: [{ scale: pulse3Scale }],
-                  opacity: pulse3Opacity,
-                }
-              ]} 
-            />
-          </View>
-        </View>
+      <View style={styles.animationContainer}>
+        <LottieView
+          source={require("@/assets/lottie/searching.json")}
+          autoPlay
+          loop
+          style={styles.animation}
+        />
+      </View>
 
-        {/* Status Section */}
-        <View style={styles.statusSection}>
-          <Text style={styles.statusText}>Looking for technicians nearby...</Text>
-          <Text style={styles.statusSubtext}>
-            This usually takes 10-30 seconds
-          </Text>
-          
-          {/* Loading Dots */}
-          <View style={styles.loadingDots}>
-            <Animated.View style={[styles.dot, { opacity: dot1Opacity }]} />
-            <Animated.View style={[styles.dot, { opacity: dot2Opacity }]} />
-            <Animated.View style={[styles.dot, { opacity: dot3Opacity }]} />
-          </View>
+      <View style={styles.statusContainer}>
+        <Text style={styles.statusText}>Looking for technicians nearby</Text>
+        
+        <View style={styles.dotsContainer}>
+          <Animated.View style={[styles.dot, { opacity: dot1 }]} />
+          <Animated.View style={[styles.dot, { opacity: dot2 }]} />
+          <Animated.View style={[styles.dot, { opacity: dot3 }]} />
         </View>
+      </View>
 
-        {/* Service Info */}
-        <View style={styles.serviceInfo}>
-          <Text style={styles.serviceTitle}>Service Details</Text>
-          <View style={styles.serviceItem}>
-            <Text style={styles.serviceLabel}>Service Type:</Text>
-            <Text style={styles.serviceValue}>{type}</Text>
-          </View>
-          <View style={styles.serviceItem}>
-            <Text style={styles.serviceLabel}>Issue:</Text>
-            <Text style={styles.serviceValue}>{subProblem}</Text>
-          </View>
+      <View style={styles.serviceCard}>
+        <View style={styles.serviceRow}>
+          <Text style={styles.serviceLabel}>Service</Text>
+          <Text style={styles.serviceValue}>{type}</Text>
         </View>
-      </LinearGradient>
+        <View style={styles.serviceDivider} />
+        <View style={styles.serviceRow}>
+          <Text style={styles.serviceLabel}>Issue</Text>
+          <Text style={styles.serviceValue}>{subProblem}</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -231,121 +98,82 @@ export default SearchingScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  gradientBackground: {
-    flex: 1,
+    backgroundColor: '#ffffff',
     paddingHorizontal: 24,
     paddingTop: 60,
-    paddingBottom: 40,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 30,
+    marginTop:80,
   },
-  headerTitle: {
+  title: {
     fontSize: 28,
     fontFamily: fonts.bold,
-    color: '#ffffff',
+    color: '#1f2937',
     textAlign: 'center',
-    marginBottom: 8,
-    letterSpacing: -0.5,
-  },
-  headerSubtitle: {
-    fontSize: 16,
-    fontFamily: fonts.regular,
-    color: 'rgba(255, 255, 255, 0.9)',
-    textAlign: 'center',
-    lineHeight: 22,
-    paddingHorizontal: 20,
   },
   animationContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'relative',
-  },
-  animationWrapper: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 150,
-    padding: 20,
-    backdropFilter: 'blur(10px)',
+    height: 250,
+    marginBottom: 20,
   },
   animation: {
-    width: 200,
-    height: 200,
+    width: 250,
+    height: 250,
   },
-  pulseContainer: {
-    position: 'absolute',
-    justifyContent: 'center',
+  statusContainer: {
     alignItems: 'center',
-  },
-  pulseCircle: {
-    position: 'absolute',
-    width: 280,
-    height: 280,
-    borderRadius: 140,
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
-  },
-  statusSection: {
-    alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 24,
   },
   statusText: {
     fontSize: 18,
     fontFamily: fonts.semiBold || fonts.bold,
-    color: '#ffffff',
-    textAlign: 'center',
-    marginBottom: 8,
+    color: '#1f2937',
+    marginBottom: 12,
   },
-  statusSubtext: {
-    fontSize: 14,
-    fontFamily: fonts.regular,
-    color: 'rgba(255, 255, 255, 0.8)',
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  loadingDots: {
+  dotsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
+    marginBottom: 8,
   },
   dot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#3b82f6',
   },
-  serviceInfo: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
-    borderRadius: 16,
-    padding: 20,
-    backdropFilter: 'blur(10px)',
+  serviceCard: {
+    backgroundColor: '#f9fafb',
+    borderRadius: 12,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#e5e7eb',
   },
-  serviceTitle: {
-    fontSize: 16,
-    fontFamily: fonts.semiBold,
-    color: '#ffffff',
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  serviceItem: {
+  serviceRow: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    paddingVertical: 6,
+  },
+  serviceDivider: {
+    height: 1,
+    backgroundColor: '#e5e7eb',
+    marginVertical: 2,
   },
   serviceLabel: {
     fontSize: 14,
     fontFamily: fonts.regular,
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: '#6b7280',
   },
   serviceValue: {
     fontSize: 14,
     fontFamily: fonts.semiBold || fonts.bold,
-    color: '#ffffff',
-    textAlign: 'right',
+    color: '#1f2937',
     flex: 1,
+    textAlign: 'right',
     marginLeft: 16,
   },
 });

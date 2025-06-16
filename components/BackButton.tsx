@@ -26,7 +26,7 @@ export default BackButton;
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: colors.grey100,
+    backgroundColor: colors.grey150,
     alignSelf: "flex-start",
     borderRadius: radius._12,
     borderCurve: "continuous",

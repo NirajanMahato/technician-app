@@ -15,19 +15,19 @@ const problems = [
   {
     label: "Electrical",
     icon: Lightning,
-    color: "#1D4ED8", // Blue-700
+    color: "#3B82F6", // Blue-500
     description: "Wiring & power issues",
   },
   {
     label: "Locksmith",
     icon: Lock,
-    color: "#2563EB", // Blue-600
+    color: "#3B82F6", // Blue-500
     description: "Keys & security",
   },
   {
     label: "HVAC",
     icon: Thermometer,
-    color: "#1E40AF", // Blue-800
+    color: "#3B82F6", // Blue-500
     description: "Heating & cooling",
   },
 ];
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     width: "47%",
     backgroundColor: "#F8FAFC", // Light gray-blue
     borderRadius: 24,
-    paddingVertical: 32,
-    paddingHorizontal: 20,
+    paddingVertical: 25,
+    paddingHorizontal: 15,
     alignItems: "center",
     marginBottom: 16,
     borderWidth: 1,

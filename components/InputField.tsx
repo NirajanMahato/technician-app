@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
   },
   inputFocused: {
     borderColor: colors.primary,
-    shadowOpacity: 0.2,
+    shadowOpacity: 0.05,
   },
 });

@@ -10,21 +10,21 @@ const searchTypes = [
     id: "rapid",
     label: "Rapid Search",
     icon: Lightning,
-    color: "#059669", // Emerald-600
+    color: "#059669", 
     title: "Estimated Budget: $150-250",
     subtitle: "Based on average market rates",
-    bgColor: "#f2faf5", // Green-50
-    borderColor: "#c5fadf" // Green-100
+    bgColor: "#f2faf5", 
+    borderColor: "#c5fadf" 
   },
   {
     id: "custom",
     label: "Custom Search",
     icon: Calculator,
-    color: "#2563EB", // Blue-600
+    color: "#2563EB", 
     title: "Set Your Budget",
     subtitle: "Enter your preferred price range",
-    bgColor: "#F8FAFC", // Slate-50
-    borderColor: "#b4cded" // Slate-200
+    bgColor: "#f0f6fc",
+    borderColor: "#dfeaf7"
   }
 ];
 

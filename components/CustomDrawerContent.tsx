@@ -15,7 +15,7 @@ export default function CustomDrawerContent(props: any) {
     { label: "Home", route: "/", icon: "home" },
     { label: "Profile", route: "/profile", icon: "user" },
     { label: "Message", route: "/message", icon: "message-square" },
-    { label: "Settings", route: "/settings", icon: "settings" },
+    { label: "Settings", route: "/UnderConstructionScreen", icon: "settings" },
   ];
 
   const handleTechnicianMode = () => {

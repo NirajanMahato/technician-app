@@ -5,26 +5,26 @@ import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-nativ
 import { Toolbox, Hammer, DropHalf, Fan, Lightning, Wrench } from "phosphor-react-native";
 import React from "react";
 
-const subProblemsMap: Record<string, { label: string; icon: any; description: string; color: string }[]> = {
+const subProblemsMap: Record<string, { label: string; icon: any; description: string;  }[]> = {
   Plumbing: [
-    { label: "Leak Repair", icon: DropHalf, description: "Fix dripping faucets or pipes", color: "#3B82F6" },
-    { label: "Clog Removal", icon: Toolbox, description: "Clear sinks or drains", color: "#1D4ED8" },
-    { label: "Installation", icon: Hammer, description: "Install fixtures or water systems", color: "#2563EB" },
+    { label: "Leak Repair", icon: DropHalf, description: "Fix dripping faucets or pipes", },
+    { label: "Clog Removal", icon: Toolbox, description: "Clear sinks or drains", },
+    { label: "Installation", icon: Hammer, description: "Install fixtures or water systems", },
   ],
   Electrical: [
-    { label: "Power Outage", icon: Lightning, description: "Fix fuse or circuit issues", color: "#3B82F6" },
-    { label: "Lighting", icon: Hammer, description: "Replace or fix lighting systems", color: "#1D4ED8" },
-    { label: "Wiring", icon: Wrench, description: "Repair or install wiring", color: "#2563EB" },
+    { label: "Power Outage", icon: Lightning, description: "Fix fuse or circuit issues",  },
+    { label: "Lighting", icon: Hammer, description: "Replace or fix lighting systems",},
+    { label: "Wiring", icon: Wrench, description: "Repair or install wiring",  },
   ],
   Locksmith: [
-    { label: "Key Duplication", icon: Hammer, description: "Duplicate or replace keys", color: "#3B82F6" },
-    { label: "Lock Installation", icon: Toolbox, description: "Install or change locks", color: "#1D4ED8" },
-    { label: "Emergency Unlock", icon: DropHalf, description: "Open locked doors quickly", color: "#2563EB" },
+    { label: "Key Duplication", icon: Hammer, description: "Duplicate or replace keys",},
+    { label: "Lock Installation", icon: Toolbox, description: "Install or change locks", },
+    { label: "Emergency Unlock", icon: DropHalf, description: "Open locked doors quickly", },
   ],
   HVAC: [
-    { label: "AC Repair", icon: Fan, description: "Fix cooling system issues", color: "#3B82F6" },
-    { label: "Heater Install", icon: Toolbox, description: "Install new heating units", color: "#1D4ED8" },
-    { label: "Maintenance", icon: Hammer, description: "Routine HVAC servicing", color: "#2563EB" },
+    { label: "AC Repair", icon: Fan, description: "Fix cooling system issues", },
+    { label: "Heater Install", icon: Toolbox, description: "Install new heating units", },
+    { label: "Maintenance", icon: Hammer, description: "Routine HVAC servicing" },
   ],
 };
 
@@ -66,8 +66,8 @@ const SubProblemScreen = () => {
                   onPress={() => handleSubSelect(item.label)}
                   activeOpacity={0.8}
                 >
-                  <View style={[styles.iconContainer, { backgroundColor: item.color + "15" }]}>
-                    <Icon color={item.color} size={32} weight="duotone" />
+                  <View style={[styles.iconContainer, { backgroundColor: "#3B82F6" + "15"}]}>
+                    <Icon color={"#3B82F6"} size={32} weight="duotone" />
                   </View>
                   <Text style={styles.cardLabel}>{item.label}</Text>
                   <Text style={styles.cardDescription}>{item.description}</Text>
@@ -128,8 +128,8 @@ const styles = StyleSheet.create({
     width: "47%",
     backgroundColor: "#F8FAFC", // Light gray-blue
     borderRadius: 24,
-    paddingVertical: 32,
-    paddingHorizontal: 20,
+    paddingVertical: 25,
+    paddingHorizontal: 15,
     alignItems: "center",
     marginBottom: 16,
     borderWidth: 1,

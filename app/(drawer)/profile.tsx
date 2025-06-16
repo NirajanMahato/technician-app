@@ -16,40 +16,46 @@ const options = [
     key: 'bookings',
     label: 'My Bookings',
     icon: <FontAwesome5 name="calendar-check" size={18} color="#2563eb" />,
+    route: "/(profile)/my-bookings" as const,
   },
   {
     key: 'addresses',
     label: 'Saved Addresses',
     icon: <Ionicons name="location-sharp" size={18} color="#2563eb" />,
+    route: "/(profile)/UnderConstructionScreen" as const,
   },
   {
     key: 'payments',
     label: 'Payment Methods',
     icon: <Feather name="credit-card" size={18} color="#2563eb" />,
+    route: "/(profile)/UnderConstructionScreen" as const,
   },
   {
     key: 'notifications',
     label: 'Notifications',
     icon: <Ionicons name="notifications" size={18} color="#2563eb" />,
+    route: "/(profile)/UnderConstructionScreen" as const,
   },
   {
     key: 'support',
     label: 'Help & Support',
     icon: <AntDesign name="questioncircleo" size={18} color="#2563eb" />,
+    route: "/(profile)/support" as const,
   },
-]
+] as const;
+
 
 const Profile = () => {
   const navigation = useNavigation();
   const router = useRouter();
 
-  const handleOptionPress = (key: string) => {
+  const handleOptionPress = (key: string, route?: string) => {
     if (key === 'logout') {
       router.replace("/(auth)/login");
-    } else {
-      alert(`Pressed: ${key}`);
+    } else if (route) {
+      router.push(route as any);
     }
-  }
+  };
 
   return (
     <View style={styles.container}>
@@ -72,7 +78,7 @@ const Profile = () => {
           </Text>
           <Text style={styles.email}>{user.email}</Text>
           <Text style={styles.number}>{user.number}</Text>
-          <TouchableOpacity style={styles.editBtn} onPress={() => handleOptionPress('edit')}>
+          <TouchableOpacity style={styles.editBtn} onPress={() => router.push("/(profile)/edit-profile")}>
             <Feather name="edit-2" size={13} color="#fff" />
             <Text style={styles.editBtnText}>Edit Profile</Text>
           </TouchableOpacity>
@@ -85,18 +91,19 @@ const Profile = () => {
       </View>
 
       <View style={styles.optionsContainer}>
-        {options.map(option => (
-          <TouchableOpacity
-            key={option.key}
-            style={styles.option}
-            onPress={() => handleOptionPress(option.key)}
-            activeOpacity={0.7}
-          >
-            <View style={styles.iconContainer}>{option.icon}</View>
-            <Text style={styles.optionLabel}>{option.label}</Text>
-            <Feather name="chevron-right" size={20} color="#b6b6b6" style={{ marginLeft: 'auto' }} />
-          </TouchableOpacity>
-        ))}
+      {options.map(option => (
+  <TouchableOpacity
+    key={option.key}
+    style={styles.option}
+    onPress={() => handleOptionPress(option.key, option.route)}
+    activeOpacity={0.7}
+  >
+    <View style={styles.iconContainer}>{option.icon}</View>
+    <Text style={styles.optionLabel}>{option.label}</Text>
+    <Feather name="chevron-right" size={20} color="#b6b6b6" style={{ marginLeft: 'auto' }} />
+  </TouchableOpacity>
+))}
+
 
         <TouchableOpacity
           style={styles.logoutBtn}
