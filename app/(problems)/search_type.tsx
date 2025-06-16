@@ -35,7 +35,7 @@ const SearchTypeSelectionScreen = () => {
   const handleSearchTypeSelect = (searchType: string) => {
     if (searchType === "rapid") {
       router.push({ 
-        pathname: "/(booking)/rapid_search", 
+        pathname: "/(booking)/searching", 
         params: { type, subProblem, searchType } 
       });
     } else {
@@ -44,7 +44,7 @@ const SearchTypeSelectionScreen = () => {
         params: { type, subProblem, searchType } 
       });
     }
-  };
+  };  
 
   return (
     <>
