@@ -11,8 +11,9 @@ import {
   Platform,
   ScrollView,
   Alert,
-  SafeAreaView,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 
 const SupportScreen = () => {
   const [name, setName] = useState("");

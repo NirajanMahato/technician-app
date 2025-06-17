@@ -9,7 +9,6 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
-  SafeAreaView,
   ScrollView,
   StatusBar,
   StyleSheet,
@@ -17,6 +16,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const EditProfileScreen = () => {
   const navigation = useNavigation();
@@ -25,7 +25,9 @@ const EditProfileScreen = () => {
   const [email, setEmail] = useState("johndoe44@gmail.com");
   const [phone, setPhone] = useState("+977 9800000000");
   const [address, setAddress] = useState("Kathmandu, Nepal");
-  const [profileImage, setProfileImage] = useState("https://via.placeholder.com/120");
+  const [profileImage, setProfileImage] = useState(
+    "https://via.placeholder.com/120"
+  );
 
   const handleSave = () => {
     if (!name.trim() || !email.trim() || !phone.trim()) {
@@ -37,15 +39,11 @@ const EditProfileScreen = () => {
   };
 
   const handleImagePicker = () => {
-    Alert.alert(
-      "Change Profile Picture",
-      "Choose an option",
-      [
-        { text: "Camera", onPress: () => console.log("Camera pressed") },
-        { text: "Gallery", onPress: () => console.log("Gallery pressed") },
-        { text: "Cancel", style: "cancel" },
-      ]
-    );
+    Alert.alert("Change Profile Picture", "Choose an option", [
+      { text: "Camera", onPress: () => console.log("Camera pressed") },
+      { text: "Gallery", onPress: () => console.log("Gallery pressed") },
+      { text: "Cancel", style: "cancel" },
+    ]);
   };
 
   return (
@@ -72,7 +70,10 @@ const EditProfileScreen = () => {
         >
           <View style={styles.profileSection}>
             <View style={styles.profileImageContainer}>
-              <Image source={{ uri: profileImage }} style={styles.profileImage} />
+              <Image
+                source={{ uri: profileImage }}
+                style={styles.profileImage}
+              />
               <TouchableOpacity
                 style={styles.editImageButton}
                 onPress={handleImagePicker}
@@ -123,7 +124,12 @@ const EditProfileScreen = () => {
             activeOpacity={0.8}
           >
             <Text style={styles.saveButtonText}>Save Changes</Text>
-            <Feather name="check" size={18} color="#ffffff" style={styles.saveButtonIcon} />
+            <Feather
+              name="check"
+              size={18}
+              color="#ffffff"
+              style={styles.saveButtonIcon}
+            />
           </TouchableOpacity>
 
           <View style={styles.bottomSpacing} />

@@ -41,7 +41,7 @@ const Home = () => {
     { title: "Kalanki", subtitle: "Kathmandu" },
     { title: "Patan", subtitle: "Lalitpur" },
     { title: "Baluwatar", subtitle: "Kathmandu" },
-    { title: "Maharajgunj", subtitle: "Kathmandu" },
+    { title: "Ratopul", subtitle: "Kathmandu" },
   ];
 
   const filteredSuggestions =

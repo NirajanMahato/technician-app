@@ -16,6 +16,8 @@ const SignupStep1 = () => {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [touched, setTouched] = useState({
     fullName: false,
     email: false,
@@ -41,9 +43,9 @@ const SignupStep1 = () => {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, backgroundColor: "transparent" }}
+      style={{ flex: 1, backgroundColor: "white" }}
       behavior={Platform.OS === "ios" ? "padding" : undefined}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : 0}
     >
       <ScrollView
         contentContainerStyle={styles.scrollContainer}
@@ -100,11 +102,18 @@ const SignupStep1 = () => {
             placeholder="Enter password"
             value={password}
             onChangeText={setPassword}
-            secureTextEntry
+            secureTextEntry={!showPassword}
             onBlur={() => handleBlur("password")}
             textContentType="oneTimeCode"
             autoComplete="one-time-code"
-            rightIcon={<Feather name="eye" size={18} color={colors.grey500} />}
+            rightIcon={
+              <Feather 
+                name={showPassword ? "eye-off" : "eye"} 
+                size={18} 
+                color={colors.grey500}
+                onPress={() => setShowPassword(!showPassword)}
+              />
+            }
           />
           {touched.password && password.length < 6 && (
             <ValidationError message="Password must be at least 6 characters" />
@@ -115,11 +124,18 @@ const SignupStep1 = () => {
             placeholder="Re-enter password"
             value={confirmPassword}
             onChangeText={setConfirmPassword}
-            secureTextEntry
+            secureTextEntry={!showConfirmPassword}
             onBlur={() => handleBlur("confirmPassword")}
             textContentType="oneTimeCode"
             autoComplete="one-time-code"
-            rightIcon={<Feather name="eye" size={18} color={colors.grey500} />}
+            rightIcon={
+              <Feather 
+                name={showConfirmPassword ? "eye-off" : "eye"} 
+                size={18} 
+                color={colors.grey500}
+                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+              />
+            }
           />
           {touched.confirmPassword && !isPasswordMatch && (
             <ValidationError message="Passwords do not match" />
