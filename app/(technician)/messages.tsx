@@ -76,7 +76,9 @@ const styles = StyleSheet.create({
   headerWrapper: {
     paddingHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 16,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grey200,
   },
   headerTitle: {
     fontSize: 30,

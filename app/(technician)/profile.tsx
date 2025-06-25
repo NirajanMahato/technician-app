@@ -1,23 +1,10 @@
-import BackButton from "@/components/BackButton";
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { colors, fonts } from "@/constants/theme";
-import {
-  AntDesign,
-  Feather,
-  FontAwesome5,
-  Ionicons,
-  MaterialIcons,
-} from "@expo/vector-icons";
-import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Switch,
-} from "react-native";
+import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
 
 const technician = {
   name: "Alex Smith",
@@ -62,11 +49,10 @@ const Profile = () => {
 
   return (
     <ScreenWrapper>
-      <View style={styles.container}>
       <View style={styles.header}>
-          <Text style={styles.title}>My Profile</Text>
-        </View>
-
+        <Text style={styles.title}>My Profile</Text>
+      </View>
+      <View style={styles.container}>
         <View style={styles.userInfoRow}>
           <View style={{ flex: 1 }}>
             <Text style={styles.greeting}>
@@ -148,15 +134,17 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: colors.white,
     paddingHorizontal: 20,
   },
   header: {
+    paddingHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 5,
+    paddingBottom: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.grey200,
   },
   title: {
     fontSize: 30,
