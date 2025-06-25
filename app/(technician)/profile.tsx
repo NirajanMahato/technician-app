@@ -64,7 +64,7 @@ const Profile = () => {
     <ScreenWrapper>
       <View style={styles.container}>
       <View style={styles.header}>
-          <Text style={styles.title}>Requests</Text>
+          <Text style={styles.title}>My Profile</Text>
         </View>
 
         <View style={styles.userInfoRow}>
@@ -89,7 +89,6 @@ const Profile = () => {
           </View>
         </View>
 
-        {/* Toggle Buttons */}
         <View style={styles.toggleSection}>
           <View style={styles.toggleRow}>
             <Text style={styles.toggleLabel}>Accept Rapid Requests</Text>
@@ -111,7 +110,6 @@ const Profile = () => {
           </View>
         </View>
 
-        {/* Options Section */}
         <View style={styles.optionsContainer}>
           {options.map((option) => (
             <TouchableOpacity
@@ -150,6 +148,7 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     backgroundColor: colors.white,
@@ -236,7 +235,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   optionsContainer: {
-    marginTop: 12,
+    borderRadius: 12,
   },
   option: {
     flexDirection: "row",
