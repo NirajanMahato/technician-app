@@ -1,55 +1,63 @@
-import { colors, spacingY } from "@/constants/theme";
+import { colors } from "@/constants/theme";
 import { verticalScale } from "@/utils/styling";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import * as Icons from "phosphor-react-native";
-import { Platform, StyleSheet, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 export default function CustomTabs({
   state,
   descriptors,
   navigation,
 }: BottomTabBarProps) {
-  const tabbarIcons: any = {
-    index: (isFocused: boolean) => (
-      <Icons.House
+
+  const tabbarIcons: Record<
+    string,
+    (isFocused: boolean) => React.ReactElement
+  > = {
+    requests: (isFocused) => (
+      <Icons.ListBullets
         size={verticalScale(30)}
-        weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.grey400}
+        weight="regular"
+        color={isFocused ? colors.primary : colors.grey600}
       />
     ),
-    request: (isFocused: boolean) => (
-      <Icons.Book
-        size={verticalScale(30)}
-        weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.grey400}
-      />
-    ),
-    message: (isFocused: boolean) => (
+    messages: (isFocused) => (
       <Icons.Chat
         size={verticalScale(30)}
-        weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.grey400}
+        weight="regular"
+        color={isFocused ? colors.primary : colors.grey600}
       />
     ),
-    account: (isFocused: boolean) => (
+    profile: (isFocused) => (
       <Icons.User
         size={verticalScale(30)}
-        weight={isFocused ? "fill" : "regular"}
-        color={isFocused ? colors.primary : colors.grey400}
+        weight="regular"
+        color={isFocused ? colors.primary : colors.grey600}
       />
     ),
   };
 
+  const tabbarLabels: Record<string, string> = {
+    requests: "Requests",
+    messages: "Messages",
+    profile: "Profile",
+  };
+
   return (
-    <View style={styles.tabbar}>
+    <View style={[styles.tabbar, { paddingBottom:  18 }]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
-        const label: any =
-          options.tabBarLabel !== undefined
-            ? options.tabBarLabel
-            : options.title !== undefined
-            ? options.title
-            : route.name;
+        const rawLabel = options.tabBarLabel ?? options.title ?? route.name;
+        const label =
+          typeof rawLabel === "string"
+            ? rawLabel
+            : tabbarLabels[route.name] || route.name;
 
         const isFocused = state.index === index;
 
@@ -74,16 +82,26 @@ export default function CustomTabs({
 
         return (
           <TouchableOpacity
-            // href={buildHref(route.name, route.params)}
             key={route.name}
             accessibilityState={isFocused ? { selected: true } : {}}
-            accessibilityLabel={options.tabBarAccessibilityLabel}
-            testID={options.tabBarButtonTestID}
             onPress={onPress}
             onLongPress={onLongPress}
             style={styles.tabbarItem}
           >
-            {tabbarIcons[route.name] && tabbarIcons[route.name](isFocused)}
+            <View style={styles.iconWrapper}>
+              {tabbarIcons[route.name]?.(isFocused)}
+              <Text
+                style={[
+                  styles.label,
+                  {
+                    color: isFocused ? colors.primary : colors.grey600,
+                    fontWeight: isFocused ? "bold" : "normal",
+                  },
+                ]}
+              >
+                {label}
+              </Text>
+            </View>
           </TouchableOpacity>
         );
       })}
@@ -95,16 +113,25 @@ const styles = StyleSheet.create({
   tabbar: {
     flexDirection: "row",
     width: "100%",
-    height: Platform.OS === "ios" ? verticalScale(73) : verticalScale(55),
-    backgroundColor: colors.grey800,
+    height: Platform.OS === "ios" ? verticalScale(73) : verticalScale(65),
+    backgroundColor: colors.white,
     justifyContent: "space-around",
     alignItems: "center",
-    borderTopColor: colors.grey700,
+    borderTopColor: colors.grey200,
     borderTopWidth: 1,
   },
   tabbarItem: {
-    marginBottom: Platform.OS == "ios" ? spacingY._10 : spacingY._10,
+    minWidth: 80,
     justifyContent: "center",
     alignItems: "center",
+  },
+  iconWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  label: {
+    marginTop: 4,
+    fontSize: 12,
+    textAlign: "center",
   },
 });

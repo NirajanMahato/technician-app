@@ -19,7 +19,7 @@ export default function CustomDrawerContent(props: any) {
   ];
 
   const handleTechnicianMode = () => {
-    router.push("/technician"); // or toggle some technician state
+    router.push("/(technician)/requests");
   };
 
   return (

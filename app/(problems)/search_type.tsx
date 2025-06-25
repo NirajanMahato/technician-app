@@ -3,48 +3,57 @@ import { fonts } from "@/constants/theme";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Calculator, Lightning } from "phosphor-react-native";
 import React from "react";
-import { StatusBar, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const searchTypes = [
   {
     id: "rapid",
     label: "Rapid Search",
     icon: Lightning,
-    color: "#059669", 
+    color: "#059669",
     title: "Estimated Budget: $150-250",
     subtitle: "Based on average market rates",
-    bgColor: "#f2faf5", 
-    borderColor: "#c5fadf" 
+    bgColor: "#f2faf5",
+    borderColor: "#c5fadf",
   },
   {
     id: "custom",
     label: "Custom Search",
     icon: Calculator,
-    color: "#2563EB", 
+    color: "#2563EB",
     title: "Set Your Budget",
     subtitle: "Enter your preferred price range",
     bgColor: "#f0f6fc",
-    borderColor: "#dfeaf7"
-  }
+    borderColor: "#dfeaf7",
+  },
 ];
 
 const SearchTypeSelectionScreen = () => {
-  const { type, subProblem } = useLocalSearchParams<{ type: string; subProblem: string }>();
+  const { type, subProblem } = useLocalSearchParams<{
+    type: string;
+    subProblem: string;
+  }>();
   const router = useRouter();
 
   const handleSearchTypeSelect = (searchType: string) => {
     if (searchType === "rapid") {
-      router.push({ 
-        pathname: "/(booking)/searching", 
-        params: { type, subProblem, searchType } 
+      router.push({
+        pathname: "/(booking)/searching",
+        params: { type, subProblem, searchType },
       });
     } else {
-      router.push({ 
-        pathname: "/(booking)/custom_search", 
-        params: { type, subProblem, searchType } 
+      router.push({
+        pathname: "/(booking)/custom_search",
+        params: { type, subProblem, searchType },
       });
     }
-  };  
+  };
 
   return (
     <>
@@ -53,7 +62,7 @@ const SearchTypeSelectionScreen = () => {
         <View style={styles.header}>
           <BackButton />
         </View>
-        
+
         <View style={styles.content}>
           <View style={styles.titleSection}>
             <Text style={styles.title}>Choose Search Type</Text>
@@ -69,28 +78,40 @@ const SearchTypeSelectionScreen = () => {
                 <TouchableOpacity
                   key={option.id}
                   style={[
-                    styles.optionCard, 
-                    { 
+                    styles.optionCard,
+                    {
                       backgroundColor: option.bgColor,
-                      borderColor: option.borderColor
-                    }
+                      borderColor: option.borderColor,
+                    },
                   ]}
                   onPress={() => handleSearchTypeSelect(option.id)}
                   activeOpacity={0.75}
                 >
                   <View style={styles.cardContent}>
-                    <View style={[styles.iconContainer, { backgroundColor: `${option.color}08` }]}>
+                    <View
+                      style={[
+                        styles.iconContainer,
+                        { backgroundColor: `${option.color}08` },
+                      ]}
+                    >
                       <Icon color={option.color} size={28} weight="duotone" />
                     </View>
-                    
+
                     <View style={styles.textContent}>
                       <Text style={styles.optionLabel}>{option.label}</Text>
                       <Text style={styles.optionTitle}>{option.title}</Text>
-                      <Text style={styles.optionSubtitle}>{option.subtitle}</Text>
+                      <Text style={styles.optionSubtitle}>
+                        {option.subtitle}
+                      </Text>
                     </View>
                   </View>
-                  
-                  <View style={[styles.indicator, { backgroundColor: option.color }]} />
+
+                  <View
+                    style={[
+                      styles.indicator,
+                      { backgroundColor: option.color },
+                    ]}
+                  />
                 </TouchableOpacity>
               );
             })}
