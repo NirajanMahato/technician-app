@@ -1,6 +1,7 @@
 import ScreenWrapper from "@/components/ScreenWrapper";
 import { colors, fonts } from "@/constants/theme";
 import { Feather } from "@expo/vector-icons";
+import { useRouter } from "expo-router";
 import React, { useState } from "react";
 import {
   ScrollView,
@@ -30,6 +31,7 @@ type Request = NewRequest | OngoingRequest;
 
 const TechnicianRequests = () => {
   const [activeTab, setActiveTab] = useState<"new" | "ongoing">("new");
+  const router = useRouter();
 
   const RequestCard = ({ request }: { request: Request }) => (
     <View style={styles.card}>
@@ -62,11 +64,36 @@ const TechnicianRequests = () => {
       </View>
 
       <View style={styles.cardActions}>
-        <TouchableOpacity style={[styles.actionButton, styles.outlinedButton]}>
+        <TouchableOpacity
+          style={[styles.actionButton, styles.outlinedButton]}
+          onPress={() =>
+            router.push({
+              pathname: "/(modals)/view-details",
+              params: Object.fromEntries(
+                Object.entries(request).map(([k, v]) => [
+                  k,
+                  v?.toString?.() ?? "",
+                ])
+              ),
+            })
+          }
+        >
           <Text style={styles.outlinedText}>View Details</Text>
         </TouchableOpacity>
         {"customerName" in request && (
-          <TouchableOpacity style={[styles.actionButton, styles.filledButton]}>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.filledButton]}
+            onPress={() =>
+              router.push({
+                pathname: "/(chat)/[id]",
+                params: {
+                  id: request.id.toString(),
+                  name: request.customerName,
+                  avatar: undefined,
+                },
+              })
+            }
+          >
             <Feather name="message-circle" size={16} color={colors.white} />
             <Text style={styles.filledText}>Chat</Text>
           </TouchableOpacity>
@@ -169,14 +196,13 @@ const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: "row",
     paddingHorizontal: 20,
-    marginBottom: 20,
   },
   tabButton: {
     flex: 1,
     paddingVertical: 12,
     paddingHorizontal: 16,
     borderBottomWidth: 3,
-    borderBottomColor: colors.grey100,
+    borderBottomColor: colors.white,
   },
   activeTab: {
     borderBottomWidth: 3,
@@ -194,6 +220,8 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: colors.grey100,
   },
   card: {
     backgroundColor: colors.white,
