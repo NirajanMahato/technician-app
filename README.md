@@ -25,10 +25,8 @@ You can run this app on your computer using an emulator, or directly on your iOS
 If you haven't already, open your terminal and run:
 
 ```
-git clone <REPO_URL>
+git clone https://github.com/NirajanMahato/technician-app
 ```
-
-Replace `<REPO_URL>` with the actual URL of this repository. Then, move into the project folder:
 
 ```
 cd technician-app
