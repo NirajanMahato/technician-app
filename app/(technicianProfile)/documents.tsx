@@ -10,8 +10,11 @@ const Documents = () => {
   return (
     <ScreenWrapper>
       <View style={styles.header}>
-        <BackButton onPress={() => router.back()} />
+        <View style={styles.headerLeft}>
+          <BackButton />
+        </View>
         <Text style={styles.title}>Documents</Text>
+        <View style={styles.headerRight} />
       </View>
       <View style={styles.content}>
         <Text style={styles.info}>
@@ -29,16 +32,26 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingTop: 16,
-    paddingBottom: 16,
+    paddingTop: 4,
+    paddingBottom: 12,
+    backgroundColor: "#fff",
     borderBottomWidth: 1,
     borderBottomColor: "#f3f4f6",
   },
+  headerLeft: {
+    width: 40,
+    alignItems: "flex-start",
+  },
+  headerRight: {
+    width: 40,
+  },
   title: {
-    fontSize: 20,
-    fontFamily: fonts.semiBold,
-    marginLeft: 16,
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#111827",
+    textAlign: "center",
   },
   content: {
     flex: 1,
