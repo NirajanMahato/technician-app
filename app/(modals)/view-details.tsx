@@ -3,11 +3,32 @@ import ScreenWrapper from "@/components/ScreenWrapper";
 import { colors, fonts } from "@/constants/theme";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const ViewDetails = () => {
   const router = useRouter();
   const params = useLocalSearchParams();
+  const type = params.type;
+
+  const handleAccept = () => {
+    router.push({
+      pathname: "/(modals)/invoice",
+      params: { ...params },
+    });
+  };
+
+  const handleReject = () => {
+    router.push({
+      pathname: "/(modals)/reject-reason",
+      params: { ...params },
+    });
+  };
 
   return (
     <ScreenWrapper>
@@ -33,6 +54,24 @@ const ViewDetails = () => {
           </View>
         ))}
       </ScrollView>
+
+      {type === "new" && (
+        <View style={styles.buttonRow}>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.acceptButton]}
+            onPress={handleAccept}
+          >
+            <Text style={styles.acceptText}>Approve</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.actionButton, styles.rejectButton]}
+            onPress={handleReject}
+          >
+            <Text style={styles.rejectText}>Decline</Text>
+          </TouchableOpacity>
+        </View>
+      )}
+      {/* For ongoing requests, just show details. You can add more logic here if needed. */}
     </ScreenWrapper>
   );
 };
@@ -84,5 +123,35 @@ const styles = StyleSheet.create({
     fontFamily: fonts.regular,
     flex: 1,
     textAlign: "right",
+  },
+  buttonRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    gap: 12,
+  },
+  actionButton: {
+    flex: 1,
+    paddingVertical: 14,
+    borderRadius: 8,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  acceptButton: {
+    backgroundColor: colors.primary,
+  },
+  rejectButton: {
+    backgroundColor: colors.grey200,
+  },
+  acceptText: {
+    color: colors.white,
+    fontFamily: fonts.semiBold,
+    fontSize: 16,
+  },
+  rejectText: {
+    color: colors.primary,
+    fontFamily: fonts.semiBold,
+    fontSize: 16,
   },
 });

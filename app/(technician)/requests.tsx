@@ -141,7 +141,6 @@ const TechnicianRequests = () => {
           </TouchableOpacity>
         </View>
 
-        {/* Content */}
         <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
           {activeTab === "new" ? (
             newRequests.length > 0 ? (

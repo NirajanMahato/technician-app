@@ -4,7 +4,14 @@ import { AntDesign, Feather, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { useRouter } from "expo-router";
 import React, { useState } from "react";
-import { StyleSheet, Switch, Text, TouchableOpacity, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 
 const technician = {
   name: "Alex Smith",
@@ -17,19 +24,37 @@ const options = [
     key: "earnings",
     label: "Total Earnings",
     icon: <Feather name="dollar-sign" size={18} color="#2563eb" />,
-    route: "/(profile)/technician-earnings" as const,
+    route: "/(technicianProfile)/technician-earnings" as const,
   },
   {
     key: "jobs",
     label: "Completed Orders",
     icon: <Feather name="check-circle" size={18} color="#2563eb" />,
-    route: "/(profile)/technician-completed" as const,
+    route: "/(technicianProfile)/technician-completed" as const,
+  },
+  {
+    key: "change-password",
+    label: "Change Password",
+    icon: <Feather name="lock" size={18} color="#2563eb" />,
+    route: "/(profile)/change-password" as const,
   },
   {
     key: "support",
     label: "Help & Support",
     icon: <AntDesign name="questioncircleo" size={18} color="#2563eb" />,
     route: "/(profile)/support" as const,
+  },
+  {
+    key: "bank-details",
+    label: "Bank Details",
+    icon: <Feather name="credit-card" size={18} color="#2563eb" />,
+    route: "/(technicianProfile)/bank-details" as const,
+  },
+  {
+    key: "documents",
+    label: "Documents",
+    icon: <Feather name="file-text" size={18} color="#2563eb" />,
+    route: "/(technicianProfile)/documents" as const,
   },
 ];
 
@@ -52,81 +77,86 @@ const Profile = () => {
       <View style={styles.header}>
         <Text style={styles.title}>My Profile</Text>
       </View>
-      <View style={styles.container}>
-        <View style={styles.userInfoRow}>
-          <View style={{ flex: 1 }}>
-            <Text style={styles.greeting}>
-              Hello, <Text style={styles.highlight}>{technician.name}</Text>
-            </Text>
-            <Text style={styles.email}>{technician.email}</Text>
-            <Text style={styles.number}>{technician.number}</Text>
-            <TouchableOpacity
-              style={styles.editBtn}
-              onPress={() => router.push("/(profile)/edit-profile")}
-            >
-              <Feather name="edit-2" size={13} color="#fff" />
-              <Text style={styles.editBtnText}>Edit Profile</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.avatarContainer}>
-            <View style={styles.avatarBg}>
-              <Feather name="user" size={32} color="#fff" />
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        showsVerticalScrollIndicator={false}
+      >
+        <View style={styles.container}>
+          <View style={styles.userInfoRow}>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.greeting}>
+                Hello, <Text style={styles.highlight}>{technician.name}</Text>
+              </Text>
+              <Text style={styles.email}>{technician.email}</Text>
+              <Text style={styles.number}>{technician.number}</Text>
+              <TouchableOpacity
+                style={styles.editBtn}
+                onPress={() => router.push("/(profile)/edit-profile")}
+              >
+                <Feather name="edit-2" size={13} color="#fff" />
+                <Text style={styles.editBtnText}>Edit Profile</Text>
+              </TouchableOpacity>
+            </View>
+            <View style={styles.avatarContainer}>
+              <View style={styles.avatarBg}>
+                <Feather name="user" size={32} color="#fff" />
+              </View>
             </View>
           </View>
-        </View>
 
-        <View style={styles.toggleSection}>
-          <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>Accept Rapid Requests</Text>
-            <Switch
-              value={acceptRapid}
-              onValueChange={setAcceptRapid}
-              trackColor={{ false: colors.grey200, true: "#4BA73F" }}
-              thumbColor={colors.white}
-            />
+          <View style={styles.toggleSection}>
+            <View style={styles.toggleRow}>
+              <Text style={styles.toggleLabel}>Accept Rapid Requests</Text>
+              <Switch
+                value={acceptRapid}
+                onValueChange={setAcceptRapid}
+                trackColor={{ false: colors.grey200, true: "#4BA73F" }}
+                thumbColor={colors.white}
+              />
+            </View>
+            <View style={styles.toggleRow}>
+              <Text style={styles.toggleLabel}>Accept Slow Requests</Text>
+              <Switch
+                value={acceptSlow}
+                onValueChange={setAcceptSlow}
+                trackColor={{ false: colors.grey200, true: "#4BA73F" }}
+                thumbColor={colors.white}
+              />
+            </View>
           </View>
-          <View style={styles.toggleRow}>
-            <Text style={styles.toggleLabel}>Accept Slow Requests</Text>
-            <Switch
-              value={acceptSlow}
-              onValueChange={setAcceptSlow}
-              trackColor={{ false: colors.grey200, true: "#4BA73F" }}
-              thumbColor={colors.white}
-            />
-          </View>
-        </View>
 
-        <View style={styles.optionsContainer}>
-          {options.map((option) => (
+          <View style={styles.optionsContainer}>
+            {options.map((option) => (
+              <TouchableOpacity
+                key={option.key}
+                style={styles.option}
+                onPress={() => handleOptionPress(option.key, option.route)}
+                activeOpacity={0.7}
+              >
+                <View style={styles.iconContainer}>{option.icon}</View>
+                <Text style={styles.optionLabel}>{option.label}</Text>
+                <Feather
+                  name="chevron-right"
+                  size={20}
+                  color="#b6b6b6"
+                  style={{ marginLeft: "auto" }}
+                />
+              </TouchableOpacity>
+            ))}
+
             <TouchableOpacity
-              key={option.key}
-              style={styles.option}
-              onPress={() => handleOptionPress(option.key, option.route)}
+              style={styles.logoutBtn}
+              onPress={() => handleOptionPress("logout")}
               activeOpacity={0.7}
             >
-              <View style={styles.iconContainer}>{option.icon}</View>
-              <Text style={styles.optionLabel}>{option.label}</Text>
-              <Feather
-                name="chevron-right"
-                size={20}
-                color="#b6b6b6"
-                style={{ marginLeft: "auto" }}
-              />
+              <View style={styles.logoutIconBg}>
+                <MaterialIcons name="logout" size={18} color="#dc2626" />
+              </View>
+              <Text style={styles.logoutLabel}>Logout</Text>
             </TouchableOpacity>
-          ))}
-
-          <TouchableOpacity
-            style={styles.logoutBtn}
-            onPress={() => handleOptionPress("logout")}
-            activeOpacity={0.7}
-          >
-            <View style={styles.logoutIconBg}>
-              <MaterialIcons name="logout" size={18} color="#dc2626" />
-            </View>
-            <Text style={styles.logoutLabel}>Logout</Text>
-          </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ScrollView>
     </ScreenWrapper>
   );
 };
@@ -134,6 +164,10 @@ const Profile = () => {
 export default Profile;
 
 const styles = StyleSheet.create({
+  scrollContainer: {
+    flexGrow: 1,
+    paddingBottom: 40,
+  },
   container: {
     flex: 1,
     backgroundColor: colors.white,
