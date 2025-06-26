@@ -24,13 +24,13 @@ const options = [
     key: "earnings",
     label: "Total Earnings",
     icon: <Feather name="dollar-sign" size={18} color="#2563eb" />,
-    route: "/(technicianProfile)/technician-earnings" as const,
+    route: "/(technicianProfile)/earnings" as const,
   },
   {
     key: "jobs",
-    label: "Completed Orders",
+    label: "Booking History",
     icon: <Feather name="check-circle" size={18} color="#2563eb" />,
-    route: "/(technicianProfile)/technician-completed" as const,
+    route: "/(technicianProfile)/booking-history" as const,
   },
   {
     key: "change-password",
@@ -39,10 +39,10 @@ const options = [
     route: "/(profile)/change-password" as const,
   },
   {
-    key: "support",
-    label: "Help & Support",
-    icon: <AntDesign name="questioncircleo" size={18} color="#2563eb" />,
-    route: "/(profile)/support" as const,
+    key: "reviews",
+    label: "Reviews",
+    icon: <Feather name="star" size={18} color="#2563eb" />,
+    route: "/(technicianProfile)/ratings" as const,
   },
   {
     key: "bank-details",
@@ -55,6 +55,12 @@ const options = [
     label: "Documents",
     icon: <Feather name="file-text" size={18} color="#2563eb" />,
     route: "/(technicianProfile)/documents" as const,
+  },
+  {
+    key: "support",
+    label: "Help & Support",
+    icon: <AntDesign name="questioncircleo" size={18} color="#2563eb" />,
+    route: "/(profile)/support" as const,
   },
 ];
 

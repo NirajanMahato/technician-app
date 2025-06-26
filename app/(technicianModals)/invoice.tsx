@@ -33,6 +33,7 @@ const InvoiceScreen = () => {
   };
 
   const handleGoHome = () => {
+
     router.replace("/(technician)/requests");
   };
 

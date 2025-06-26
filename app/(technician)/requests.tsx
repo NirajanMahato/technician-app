@@ -67,8 +67,8 @@ const TechnicianRequests = () => {
         <TouchableOpacity
           style={[styles.actionButton, styles.outlinedButton]}
           onPress={() =>
-            router.push({
-              pathname: "/(modals)/view-details",
+            router.replace({
+              pathname: "/(technicianModals)/view-details",
               params: Object.fromEntries(
                 Object.entries(request).map(([k, v]) => [
                   k,

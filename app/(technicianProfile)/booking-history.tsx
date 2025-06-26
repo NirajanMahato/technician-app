@@ -12,6 +12,7 @@ const mockOrders = [
     date: "2024-05-30",
     amount: 120,
     customer: "John Smith",
+    status: "Completed",
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const mockOrders = [
     date: "2024-05-25",
     amount: 90,
     customer: "Sarah Johnson",
+    status: "Cancelled",
   },
   {
     id: 3,
@@ -26,20 +28,21 @@ const mockOrders = [
     date: "2024-05-18",
     amount: 150,
     customer: "Alex Brown",
+    status: "Completed",
   },
 ];
 
-const TechnicianCompleted = () => {
+const BookingHistory = () => {
   const router = useRouter();
   return (
     <ScreenWrapper>
-       <View style={styles.header}>
-          <View style={styles.headerLeft}>
-            <BackButton />
-          </View>
-          <Text style={styles.title}>Completed Orders</Text>
-          <View style={styles.headerRight} />
+      <View style={styles.header}>
+        <View style={styles.headerLeft}>
+          <BackButton />
         </View>
+        <Text style={styles.title}>Booking History</Text>
+        <View style={styles.headerRight} />
+      </View>
       <View style={styles.content}>
         <FlatList
           data={mockOrders}
@@ -50,6 +53,7 @@ const TechnicianCompleted = () => {
                 <Text style={styles.service}>{item.service}</Text>
                 <Text style={styles.customer}>{item.customer}</Text>
                 <Text style={styles.date}>{item.date}</Text>
+                <Text style={styles.status}>{item.status}</Text>
               </View>
               <Text style={styles.amount}>${item.amount}</Text>
             </View>
@@ -60,7 +64,7 @@ const TechnicianCompleted = () => {
   );
 };
 
-export default TechnicianCompleted;
+export default BookingHistory;
 
 const styles = StyleSheet.create({
   header: {
@@ -117,6 +121,12 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: "#9CA3AF",
     fontFamily: fonts.regular,
+    marginTop: 2,
+  },
+  status: {
+    fontSize: 13,
+    color: "#2563eb",
+    fontFamily: fonts.medium,
     marginTop: 2,
   },
   amount: {

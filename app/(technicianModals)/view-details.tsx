@@ -17,15 +17,15 @@ const ViewDetails = () => {
   const type = params.type;
 
   const handleAccept = () => {
-    router.push({
-      pathname: "/(modals)/invoice",
+    router.replace({
+      pathname: "/(technicianModals)/invoice",
       params: { ...params },
     });
   };
 
   const handleReject = () => {
-    router.push({
-      pathname: "/(modals)/reject-reason",
+    router.replace({
+      pathname: "/(technicianModals)/reject-reason",
       params: { ...params },
     });
   };

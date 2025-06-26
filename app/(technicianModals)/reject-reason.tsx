@@ -32,8 +32,7 @@ const RejectReasonScreen = () => {
       selectedReason === "Other" ? customReason.trim() : selectedReason;
     if (!finalReason) return;
 
-    // Submit the reason (can post to API here)
-    router.back();
+    router.replace("/(technician)/requests");
   };
 
   return (
